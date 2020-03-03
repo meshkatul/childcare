@@ -2,7 +2,12 @@ package org.perscholas.childcare.dto;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+@Entity
 public class DailyActivity {
+	
+	@Id
 	private int activityId;
 	private Date activityByDate;
 	private String activityName;
