@@ -13,6 +13,7 @@ public class User {
 	private String password;
 	private String role;
 	
+	
 	public User() {
 		
 	}
@@ -75,6 +76,9 @@ public class User {
 		this.role = role;
 	}
 	
-	
+	public void eat() {
+		System.out.println("eating");
+		
+	}
 
 }
