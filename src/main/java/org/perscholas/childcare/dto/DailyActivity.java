@@ -4,12 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 @Entity
+@Table(name = "dailyactivity")
 public class DailyActivity {
 	
 	@Id
 	private int activityId;
-	private Date activityByDate;
+	private String activityDate;
 	private String activityName;
 	private String activityDescription;
 	private int studentId;
@@ -18,11 +20,10 @@ public class DailyActivity {
 		
 	}
 
-	public DailyActivity(int activityId, Date activityByDate, String activityName, String activityDescription,
+	public DailyActivity(int activityId, String activityDate, String activityName, String activityDescription,
 			int studentId) {
-		super();
 		this.activityId = activityId;
-		this.activityByDate = activityByDate;
+		this.activityDate = activityDate;
 		this.activityName = activityName;
 		this.activityDescription = activityDescription;
 		this.studentId = studentId;
@@ -36,12 +37,12 @@ public class DailyActivity {
 		this.activityId = activityId;
 	}
 
-	public Date getActivityByDate() {
-		return activityByDate;
+	public String getActivityDate() {
+		return activityDate;
 	}
 
-	public void setActivityByDate(Date activityByDate) {
-		this.activityByDate = activityByDate;
+	public void setActivityByDate(String activityByDate) {
+		this.activityDate = activityByDate;
 	}
 
 	public String getActivityName() {
