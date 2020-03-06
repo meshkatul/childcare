@@ -22,25 +22,6 @@ public class DailyActivity {
 	private String incident;
 	private String supply;
 	
-	
-	public DailyActivity() {
-		
-	}
-
-
-	public DailyActivity(int activityId, String activityDate, int studentId, String meal, String nap,
-			String restroomUse, String learning, String incident, String supply) {
-		this.activityId = activityId;
-		this.activityDate = activityDate;
-		this.studentId = studentId;
-		this.meal = meal;
-		this.nap = nap;
-		this.restroomUse = restroomUse;
-		this.learning = learning;
-		this.incident = incident;
-		this.supply = supply;
-	}
-
 
 	public int getActivityId() {
 		return activityId;
