@@ -1,46 +1,50 @@
 package org.perscholas.childcare.controllers;
 
-
-import java.util.List;
-
 import org.perscholas.childcare.dto.DailyActivity;
+import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.services.DailyActivityService;
-import org.perscholas.entity.DailyActivityEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@RestController
-@RequestMapping("activity")
+@Controller
+@RequestMapping("activities")
 public class DailyActivityController {
 	@Autowired
 	DailyActivityService dailyActivityService;
-	
-	@GetMapping
-	public List<DailyActivity> list() {
-		return dailyActivityService.listActivities();
+
+	// show activity page
+	@RequestMapping(value = "/{studentId}/{activityDate}", method = RequestMethod.GET)
+	public String viewActivityPage(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date,
+			Model model) {
+		DailyActivity dailyActivity = dailyActivityService.get(studentId, date);
+
+		if (dailyActivity == null) {
+			System.out.println("Could not find DailyActivity: " + studentId + " - " + date);
+			dailyActivity = new DailyActivity();
+
+			Student student = new Student();
+			student.setStudentId(studentId);
+			dailyActivity.setStudent(student);
+			dailyActivity.setActivityDate(date);
+		} else {
+			System.out.println("Retrieved DailyActivity: " + studentId + " - " + date);
+		}
+
+		model.addAttribute("dailyActivity", dailyActivity);
+		return "activity";
 	}
-	
-	
-	@GetMapping("student/{id}/{date}")
-	public List<DailyActivity> getActivityByStudent(@PathVariable String id, @PathVariable String date) {
-		return dailyActivityService.listActivityByStudent(Integer.parseInt(id), date);
+
+	@RequestMapping(value = "/{studentId}/{activityDate}", method = RequestMethod.POST)
+	public String saveActivity(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date,
+			@ModelAttribute("dailyActivity") DailyActivity dailyActivity) {
+		System.out.println("IN dailyActivity/POST");
+		dailyActivityService.addActivities(dailyActivity);
+		return "activity";
 	}
-	
-	//add new activity
-	@PostMapping
-	public DailyActivity addDailyActivity(@RequestBody DailyActivityEntity dailyActivityEntity) {
-		dailyActivityService.addDailyActivity(dailyActivityEntity);
-		return null;
-	}
-	
-//	@GetMapping("{date}/activities") 
-//	public List<DailyActivity> getActivityByDate(@PathVariable String date) {
-//		return dailyActivityService.listActivityByDate(date);
-//	}
 
 }

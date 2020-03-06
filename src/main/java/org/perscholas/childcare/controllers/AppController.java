@@ -51,21 +51,7 @@ public class AppController {
 		return "redirect://registerSuccessful";
 	}
 
-	// show activity page
-	@RequestMapping(value = "/activities", method = RequestMethod.GET)
-	public String viewActivityPage(Model model) {
-		DailyActivity dailyActivity = new DailyActivity();
-		model.addAttribute("dailyactivity", dailyActivity);
-		System.out.println("here ins activities==============");
-		return "activity";
-	}
-
-	// add new daily activity
-	@RequestMapping(value = "/activities", method = RequestMethod.POST)
-	public String saveActivity(@ModelAttribute("dailyactivity") DailyActivity dailyActivity) {
-		dailyActivityService.addActivities(dailyActivity);
-		return "activity";
-	}
+	
 
 	// show register successful page
 	@RequestMapping("/registerSuccessful")

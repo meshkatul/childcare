@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.services.StudentService;
-import org.perscholas.entity.StudentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +34,8 @@ public class StudentController {
 	
 	// add new student
 		@PostMapping
-		public Student addStudent(@RequestBody StudentEntity studentEntity) {
-			return studentService.addStudent(studentEntity);
+		public Student addStudent(@RequestBody Student student) {
+			return studentService.save(student);
 
 		}
 }
