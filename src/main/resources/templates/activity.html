@@ -18,7 +18,7 @@
          }
       </style>
    </head>
-   <body> 
+   <body style="background-color:powderblue;"> 
       <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
          <tr><tr>
             <td><h1>Daily Activities</h1></td>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <td align='center'>Student ID</td>
-                <td><input type="text" th:field="*{studentId}" /></td>
+                <td><input type="text" th:field="*{student.studentId}" /></td>
              </tr>
             <tr>
                <td align='center'>Meal</td>
@@ -42,22 +42,9 @@
                <td><input type="text" th:field="*{nap}" /> </td>
             </tr>
             <tr>
-               <td align='center'>Restroom use</td>
-               <td><input type="text" th:field="*{restroomUse}" /> </td>
-            </tr>
-            <tr>
                <td align='center'>Learning</td>
                <td><input type="text" th:field="*{learning}" /> </td>
             </tr>
-            <tr>
-               <td align='center'>Incident</td>
-               <td><input type="text" th:field="*{incident}" /> </td>
-            </tr>
-            <tr>
-               <td align='center'>Supply</td>
-               <td><input type="text" th:field="*{supply}" /> </td>
-            </tr>
-            <tr>
                <td>&nbsp;</td>
                <td>
                   <input type="submit" value="Submit" />

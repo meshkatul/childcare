@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.perscholas.childcare.db.DailyActivityRepository;
+import org.perscholas.childcare.db.StudentRepository;
 import org.perscholas.childcare.dto.DailyActivity;
+import org.perscholas.childcare.dto.Student;
+import org.perscholas.entity.DailyActivityEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,6 +17,9 @@ public class DailyActivityService {
 	
 	@Autowired
 	DailyActivityRepository dailyActivityRepository;
+	
+	@Autowired
+	StudentRepository studentRepository;
 	
 	//get all activities
 		public List<DailyActivity> listActivities() {
@@ -26,7 +32,7 @@ public class DailyActivityService {
 		List<DailyActivity> activitiesOfAStudent = new ArrayList<DailyActivity>();
 
 		for (DailyActivity da : allActivities) {
-			if ((da.getStudentId() == studentId) && (da.getActivityDate().equals(date)))  {
+			if ((da.getStudent().getStudentId() == studentId) && (da.getActivityDate().equals(date)))  {
 				activitiesOfAStudent.add(da);
 			}
 		} return activitiesOfAStudent;
@@ -35,6 +41,21 @@ public class DailyActivityService {
 	//adding activities  
 	public void addActivities(DailyActivity dailyActivity) {
 		dailyActivityRepository.save(dailyActivity);
+	}
+	
+	//adding activities by student id
+	public DailyActivity addDailyActivity(DailyActivityEntity dailyActivityEntity) {
+		DailyActivity dailyActivity = new DailyActivity();
+		dailyActivity.setActivityDate(dailyActivityEntity.getActivityDate());
+		dailyActivity.setMeal(dailyActivityEntity.getMeal());
+		dailyActivity.setNap(dailyActivityEntity.getNap());
+		dailyActivity.setLearning(dailyActivityEntity.getLearning());
+		
+		Student student = studentRepository.findById(dailyActivityEntity.getStudentId()).get();
+		
+		dailyActivity.setStudent(student);
+		
+		return dailyActivityRepository.save(dailyActivity);
 	}
 	
 

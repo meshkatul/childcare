@@ -33,7 +33,7 @@ public class StudentController {
 		return studentService.getStudent(Integer.parseInt(id));
 	}
 	
-	// add new daily activity
+	// add new student
 		@PostMapping
 		public Student addStudent(@RequestBody StudentEntity studentEntity) {
 			return studentService.addStudent(studentEntity);
