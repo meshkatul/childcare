@@ -4,28 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#studenttable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
 </head>
 
 <body>
-    <div align="center">
+    <div class="container">
         <h1>List of students</h1>
-        
-        <table border="1">
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br>
+        <table  class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Student ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Class ID</th>
+                    <th>Class Name</th>
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody id="studenttable">
                 <tr th:each="student : ${listStudent}">
                     <td th:text="${student.studentId}">Student ID</td>
                     <td th:text="${student.stuFirstName}">First Name</td>
                     <td th:text="${student.stuLastName}">Last Name</td>
-                    <td th:text="${student.classId}">Class ID</td>
+                    <td th:text="${student.classRoom.className}">Class Name</td>
                 </tr>
             </tbody>
         </table>

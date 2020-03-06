@@ -2,6 +2,8 @@ package org.perscholas.childcare.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Student {
@@ -9,18 +11,17 @@ public class Student {
 	private int studentId;
 	private String stuFirstName;
 	private String stuLastName;
-	private int classId;
+	@ManyToOne
+	@JoinColumn(name="class_id")
+	private ClassRoom classRoom;
 	
 	
-	public Student() {
-		
+	public ClassRoom getClassRoom() {
+		return classRoom;
 	}
 
-	public Student(int studentId, String stuFirstName, String stuLastName, int classId) {
-		this.studentId = studentId;
-		this.stuFirstName = stuFirstName;
-		this.stuLastName = stuLastName;
-		this.classId = classId;
+	public void setClassRoom(ClassRoom classRoom) {
+		this.classRoom = classRoom;
 	}
 
 	public int getStudentId() {
@@ -47,13 +48,6 @@ public class Student {
 		this.stuLastName = stuLastName;
 	}
 
-	public int getClassId() {
-		return classId;
-	}
-
-	public void setClassId(int classId) {
-		this.classId = classId;
-	}
 	
 
 }

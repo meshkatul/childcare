@@ -1,8 +1,7 @@
 package org.perscholas.childcare.controllers;
 
-import java.io.FileNotFoundException;
-import java.util.List;
 
+import java.util.List;
 import org.perscholas.childcare.dto.ClassRoom;
 import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.services.ClassRoomService;
@@ -23,12 +22,12 @@ public class ClassRoomController {
 	StudentService studentService;
 	
 	@GetMapping
-	public List<ClassRoom> list() throws FileNotFoundException{
+	public List<ClassRoom> list() {
 		return classRoomService.listClassRooms();
 	}
 	
 	@GetMapping("{id}/students")
-	public List<Student> getStudentsByClass(@PathVariable String id) throws FileNotFoundException {
+	public List<Student> getStudentsByClass(@PathVariable String id) {
 		return studentService.listStudentsByClass(Integer.parseInt(id));
 	}
 

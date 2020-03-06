@@ -1,7 +1,6 @@
 package org.perscholas.childcare.services;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.perscholas.childcare.db.DailyActivityRepository;
@@ -32,6 +31,12 @@ public class DailyActivityService {
 			}
 		} return activitiesOfAStudent;
 	}
+	
+	//adding activities  
+	public void addActivities(DailyActivity dailyActivity) {
+		dailyActivityRepository.save(dailyActivity);
+	}
+	
 
 	
 //	public List<DailyActivity> listActivityByDate(String activityDate) {

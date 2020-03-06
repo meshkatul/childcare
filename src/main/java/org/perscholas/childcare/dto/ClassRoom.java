@@ -10,33 +10,19 @@ public class ClassRoom {
 	@Id
 	private int classId;
 	private String className;
-	
-	public ClassRoom() {
-		
-	}
-
-	public ClassRoom(int classId, String className) {
-		super();
-		this.classId = classId;
-		this.className = className;
-	}
-
-	public int getClassRoomID() {
+	public int getClassId() {
 		return classId;
 	}
-
-	public void setClassRoomID(int classRoomID) {
-		this.classId = classRoomID;
+	public void setClassId(int classId) {
+		this.classId = classId;
 	}
-
-	public String getClassRoomName() {
+	public String getClassName() {
 		return className;
 	}
-
-	public void setClassRoomName(String classRoomName) {
-		this.className = classRoomName;
+	public void setClassName(String className) {
+		this.className = className;
 	}
 	
-	
+
 
 }

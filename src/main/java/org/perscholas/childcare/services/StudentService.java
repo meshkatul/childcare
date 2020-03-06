@@ -1,6 +1,6 @@
 package org.perscholas.childcare.services;
 
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.perscholas.childcare.db.StudentRepository;
@@ -19,7 +19,7 @@ public class StudentService {
 	}
 
 	//get a particular student by id
-	public Student getStudent(int studentID) throws FileNotFoundException {
+	public Student getStudent(int studentID) {
 		Student student = studentRepository.findById(studentID).get();
 		return student;
 	}
@@ -30,7 +30,7 @@ public class StudentService {
 		List<Student> studentsInAClass = new ArrayList<Student>();
 
 		for (Student st : allStudents) {
-			if (st.getClassId() == classId) {
+			if (st.getClassRoom().getClassId() == classId) {
 				studentsInAClass.add(st);
 			}
 		} return studentsInAClass;

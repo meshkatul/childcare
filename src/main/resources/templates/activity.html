@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+   <head>
+      <title th:utext="${title}">Daily Activity</title>
+      <style>
+         th, td {
+         padding: 5px;
+         }
+         td span  {
+         font-size:90%;
+         font-style: italic;
+         color: red;
+         }
+         .error {
+         color: red;
+         font-style: italic;
+         }
+      </style>
+   </head>
+   <body> 
+      <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
+         <tr><tr>
+            <td><h1>Daily Activities</h1></td>
+         </tr><center>
+      <form action="#" th:action="@{/activities}" th:object="${dailyactivity}" method="POST">
+         <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
+            <tr>
+               <td align='center'>Date</td>
+               <td><input type="text" th:field="*{activityDate}" /></td>
+            </tr>
+            <tr>
+                <td align='center'>Student ID</td>
+                <td><input type="text" th:field="*{studentId}" /></td>
+             </tr>
+            <tr>
+               <td align='center'>Meal</td>
+               <td><input type="text" th:field="*{meal}" /> </td>
+            </tr>
+            <tr>
+               <td align='center'>Nap</td>
+               <td><input type="text" th:field="*{nap}" /> </td>
+            </tr>
+            <tr>
+               <td align='center'>Restroom use</td>
+               <td><input type="text" th:field="*{restroomUse}" /> </td>
+            </tr>
+            <tr>
+               <td align='center'>Learning</td>
+               <td><input type="text" th:field="*{learning}" /> </td>
+            </tr>
+            <tr>
+               <td align='center'>Incident</td>
+               <td><input type="text" th:field="*{incident}" /> </td>
+            </tr>
+            <tr>
+               <td align='center'>Supply</td>
+               <td><input type="text" th:field="*{supply}" /> </td>
+            </tr>
+            <tr>
+               <td>&nbsp;</td>
+               <td>
+                  <input type="submit" value="Submit" />
+                  <input type="submit" value="Cancel"; <a th:href="@{/}"></a>
+                 
+               </td>
+               <td>&nbsp;</td>
+            </tr>
+
+         </table>
+      </form>  
+   </body>
+</html>

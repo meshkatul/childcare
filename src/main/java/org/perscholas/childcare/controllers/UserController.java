@@ -19,17 +19,17 @@ public class UserController {
 	UserService userService;
 
 	@GetMapping
-	public List<User> list() throws FileNotFoundException {
+	public List<User> list() {
 		return userService.listUsers();
 	}
 	
 	@GetMapping("{id}")
-	public User get(@PathVariable String id) throws FileNotFoundException {
+	public User get(@PathVariable String id) {
 		return userService.getUser(Integer.parseInt(id));
 	}
 	
 	@PostMapping
-	public void add(@RequestBody User newUser) throws FileNotFoundException {
+	public void add(@RequestBody User newUser) {
 		userService.addUser(newUser);
 	}
 

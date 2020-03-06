@@ -1,6 +1,6 @@
 package org.perscholas.childcare.controllers;
 
-import java.io.FileNotFoundException;
+
 import java.util.List;
 
 import org.perscholas.childcare.dto.Student;
@@ -21,13 +21,13 @@ public class StudentController {
 	
 
 	@GetMapping
-	public List<Student> list() throws FileNotFoundException {
+	public List<Student> list()  {
 		return studentService.listStudents();
 	}
 	
 	
 	@GetMapping("{id}")
-	public Student get(@PathVariable String id) throws FileNotFoundException {
+	public Student get(@PathVariable String id) {
 		return studentService.getStudent(Integer.parseInt(id));
 	}	
 }
