@@ -1,7 +1,7 @@
 package org.perscholas.childcare.controllers;
 
 import java.util.List;
-import org.perscholas.childcare.dto.DailyActivity;
+
 import org.perscholas.childcare.dto.LoginForm;
 import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.dto.User;
@@ -26,7 +26,7 @@ public class AppController {
 
 	@Autowired
 	DailyActivityService dailyActivityService;
-
+	
 	// show student page
 	@RequestMapping("/")
 	public String viewStudentPage(Model model) {

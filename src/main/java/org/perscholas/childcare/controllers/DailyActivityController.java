@@ -16,6 +16,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class DailyActivityController {
 	@Autowired
 	DailyActivityService dailyActivityService;
+	
+	@RequestMapping(value = "calendar", method=RequestMethod.GET)
+	public String show(Model model) {
+		return "calendar";
+	}
+	
+	//show calendar
+		@RequestMapping(value = "calendar", method=RequestMethod.POST)
+		public String showCalendarPage(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date, Model model) {
+			//DailyActivity dailyActivity = dailyActivityService.addActivities(studentId, date);
+			return "activity";
+		}
 
 	// show activity page
 	@RequestMapping(value = "/{studentId}/{activityDate}", method = RequestMethod.GET)
