@@ -17,18 +17,14 @@ public class DailyActivityController {
 	@Autowired
 	DailyActivityService dailyActivityService;
 	
-	@RequestMapping(value = "calendar", method=RequestMethod.GET)
-	public String show(Model model) {
-		return "calendar";
-	}
 	
-	//show calendar
-		@RequestMapping(value = "calendar", method=RequestMethod.POST)
-		public String showCalendarPage(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date, Model model) {
-			//DailyActivity dailyActivity = dailyActivityService.addActivities(studentId, date);
-			return "activity";
+	// show calendar page
+		@RequestMapping(value = "/calendar", method = RequestMethod.GET)
+		public String viewRegistrationPage(Model model) {
+			return "calendar";
 		}
 
+		
 	// show activity page
 	@RequestMapping(value = "/{studentId}/{activityDate}", method = RequestMethod.GET)
 	public String viewActivityPage(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date,

@@ -30,8 +30,6 @@
    
     <body>
         <br> <br> <br>
-        <form action="#" th:action="@{/activities/{studId}/{actDate}(studId=${studentId},actDate=${activityDate})}" th:object="${dailyActivity}" method="POST">
-		<input type="hidden" th:field="*{activityId}" />
         <div class = 'content'>
         <p><font size="+1">Student Id</font></br> <input type="text" placeholder="Enter student Id"></p>
     </div>

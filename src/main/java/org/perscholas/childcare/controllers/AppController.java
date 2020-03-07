@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,13 +28,21 @@ public class AppController {
 	@Autowired
 	DailyActivityService dailyActivityService;
 	
-	// show student page
+	// show student list page
 	@RequestMapping("/")
 	public String viewStudentPage(Model model) {
 		List<Student> listStudent = studentService.listStudents();
 		//System.out.println("StudentListSize: " + listStudent.size());
 		model.addAttribute("listStudent", listStudent);
 		return "student";
+	}
+	
+	//show individual student page
+	@RequestMapping(value ="student/{id}", method = RequestMethod.GET )
+	public String viewStudentInfoPage(@PathVariable int id, Model model) {
+		Student student = studentService.getStudent(id);
+		model.addAttribute(student);
+		return "studentInfo";
 	}
 
 	// show registration page
