@@ -3,31 +3,70 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Individual Student Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <title>Student Details</title>
+
 </head>
 
 <body>
-    <div align="center">
-        <h1>Student details</h1>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Student ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Class ID</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                    <td th:text="${student.studentId}">Student ID</td>
-                    <td th:text="${student.stuFirstName}">First Name</td>
-                    <td th:text="${student.stuLastName}">Last Name</td>
-                    <td th:text="${student.classRoom.className}">Class Name</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container">
+    <h2>Student Details</h2>
+    <p>Select a date to see daily activity</p>
+
+    <input id="studentId" type="hidden" th:value="${student.studentId}"/>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th>ID</th>
+            <td th:text="${student.studentId}"></td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td th:text="${student.stuFirstName} + ' ' + ${student.stuLastName}"></td>
+        </tr>
+        <tr>
+            <th>Class</th>
+            <td th:text="${student.classRoom.className}"></td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>
+                <div class="input-group input-append date" id="dateRangePicker">
+                    <input id="calDate" class="form-control" name="date" type="text"/>
+                    <span class="input-group-addon add-on"> <span class="glyphicon glyphocon-calendar"/> </span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th/>
+            <td><button id="submitBtn" type="submit" class="btn btn-default">Submit</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#submitBtn').click(function(){
+            var studentId = $("#studentId").val();
+            var calDate = $("#calDate").val();
+
+            console.log(studentId + '/' + calDate)
+            window.location.href= 'activities/' + studentId + '/' + calDate;
+        })
+        $('#dateRangePicker').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: '2020-01-01',
+            endDate: '2020-12-31'
+        });
+    });
+</script>
+
 </body>
 
 </html>

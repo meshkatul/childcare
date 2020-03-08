@@ -37,13 +37,6 @@ public class AppController {
 		return "student";
 	}
 	
-	//show individual student page
-	@RequestMapping(value ="student/{id}", method = RequestMethod.GET )
-	public String viewStudentInfoPage(@PathVariable int id, Model model) {
-		Student student = studentService.getStudent(id);
-		model.addAttribute(student);
-		return "studentInfo";
-	}
 
 	// show registration page
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
