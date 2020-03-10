@@ -1,8 +1,10 @@
 package org.perscholas.childcare.controllers;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.perscholas.childcare.dto.LoginForm;
 import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.dto.User;
 import org.perscholas.childcare.services.DailyActivityService;
@@ -12,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 public class AppController {
@@ -28,14 +32,30 @@ public class AppController {
 	@Autowired
 	DailyActivityService dailyActivityService;
 	
-	// show student list page
-	@RequestMapping("/")
-	public String viewStudentPage(Model model) {
-		List<Student> listStudent = studentService.listStudents();
-		//System.out.println("StudentListSize: " + listStudent.size());
-		model.addAttribute("listStudent", listStudent);
-		return "student";
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
 	}
+
+	@RequestMapping({ "/index", "/" })
+	public String index() {
+		Collection<SimpleGrantedAuthority> authorities =
+				(Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext()
+						.getAuthentication().getAuthorities();
+
+		Set<String> roles = authorities.stream()
+				.map(r -> r.getAuthority()).collect(Collectors.toSet());
+		if (roles.contains("ROLE_ADMIN")) {
+			return "redirect:/students";
+		} else if(roles.contains("ROLE_PARENT")) {
+			return "redirect:/students/1";
+		}
+
+		return "index";
+	}
+	
+	
+	
 	
 
 	// show registration page
@@ -53,40 +73,6 @@ public class AppController {
 		return "redirect://registerSuccessful";
 	}
 
+
 	
-
-	// show register successful page
-	@RequestMapping("/registerSuccessful")
-	public String viewRegisterSuccessful(Model model) {
-		return "successfulRegistration";
-	}
-
-	// show login page
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginForm() {
-		return "login";
-	}
-
-	// validation
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
-		User user = new User();
-		String username = loginForm.getUsername();
-		String password = loginForm.getPassword();
-
-		if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
-			return "registration";
-		}
-
-		model.addAttribute("invalidCredentials", true);
-		return "registration";
-
-	}
-
-	/*
-	 * @RequestMapping(value = "/registration", method = RequestMethod.GET) public
-	 * String viewRegistrationPage(Model model) { List<User> listUser =
-	 * userService.listUsers(); model.addAttribute("listUser", listUser); return
-	 * "registration"; }
-	 */
 }

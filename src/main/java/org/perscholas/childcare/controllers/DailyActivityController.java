@@ -21,7 +21,11 @@ public class DailyActivityController {
     }
 
 
-    // show activity page
+ // show header page
+ 		@RequestMapping(value = "/header", method = RequestMethod.GET)
+ 		public String getHeader(Model model) {
+ 			return "header";
+ 		}
 
 
 }

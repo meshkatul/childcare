@@ -29,10 +29,14 @@ public class StudentController {
     DailyActivityService dailyActivityService;
 
 
-    @GetMapping
-    public List<Student> list() {
-        return studentService.listStudents();
-    }
+ // show student list page
+ 	@RequestMapping("/")
+ 	public String viewStudentPage(Model model) {
+ 		List<Student> listStudent = studentService.listStudents();
+ 		//System.out.println("StudentListSize: " + listStudent.size());
+ 		model.addAttribute("listStudent", listStudent);
+ 		return "student";
+ 	}
 
 
 	//show individual student page

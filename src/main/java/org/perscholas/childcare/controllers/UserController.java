@@ -1,7 +1,7 @@
 package org.perscholas.childcare.controllers;
 
-import java.io.FileNotFoundException;
 import java.util.List;
+
 import org.perscholas.childcare.dto.User;
 import org.perscholas.childcare.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

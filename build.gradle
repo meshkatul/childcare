@@ -18,6 +18,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
+	
 	runtimeOnly 'mysql:mysql-connector-java:5.1.6'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
