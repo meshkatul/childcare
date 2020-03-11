@@ -38,10 +38,11 @@
 
             <tbody id="studenttable">
                 <tr th:each="student : ${listStudent}">
-                    <td th:text="${student.studentId}">Student ID</td>
+                   <td><a th:href="@{/students/{id}(id=${student.studentId})}"><label th:text="${student.studentId}"/></a></td>
                     <td th:text="${student.stuFirstName}">First Name</td>
                     <td th:text="${student.stuLastName}">Last Name</td>
                     <td th:text="${student.classRoom.className}">Class Name</td>
+                    
                 </tr>
             </tbody>
         </table>

@@ -58,10 +58,10 @@ public class AppController {
 	public String viewRegistrationPage(Model model) {
 		Parent parentForm = new Parent();
 		model.addAttribute("parent", parentForm);
-		return "registration";
+		return "parentRegistration";
 	}
 	
-	// add new user
+	// add new parent
 		@RequestMapping(value = "/register", method = RequestMethod.POST)
 		public String saveParent(@ModelAttribute("parent") Parent newParent) {
 			parentService.addParent(newParent);
@@ -75,6 +75,14 @@ public class AppController {
 		model.addAttribute("student", studentForm);
 		return "studentRegistration";
 	}
+	
+	// add new student
+			@RequestMapping(value = "/register_student", method = RequestMethod.POST)
+			public String saveStudent(@ModelAttribute("student") Student newStudent) {
+				studentService.addStudent(newStudent);
+				return "studentRegistration";
+			}
+		
 
 	
 

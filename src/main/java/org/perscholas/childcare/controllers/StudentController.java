@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,11 +32,11 @@ public class StudentController {
  		List<Student> listStudent = studentService.listStudents();
  		//System.out.println("StudentListSize: " + listStudent.size());
  		model.addAttribute("listStudent", listStudent);
- 		return "student";
+ 		return "studentList";
  	}
 
 
-	//show individual student page
+	//show individual student page and search for activity by date
 	@RequestMapping(value ="{id}", method = RequestMethod.GET )
 	public String viewStudentInfoPage(@PathVariable int id, Model model) {
 		Student student = studentService.getStudent(id);
@@ -46,12 +44,9 @@ public class StudentController {
 		return "studentInfo";
 	}
 
-    // add new student
-    @PostMapping
-    public Student addStudent(@RequestBody Student student) {
-        return studentService.save(student);
-
-    }
+ 
+	
+	//view students activity by date
     @RequestMapping(value = "/activities/{studentId}/{activityDate}", method = RequestMethod.GET)
     public String viewActivityPage(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date,
                                    Model model) {
@@ -73,6 +68,7 @@ public class StudentController {
         return "activity";
     }
 
+    //edit/add students activity
     @RequestMapping(value = "/activities/{studentId}/{activityDate}", method = RequestMethod.POST)
     public String saveActivity(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date,
                                @ModelAttribute("dailyActivity") DailyActivity dailyActivity) {
@@ -80,4 +76,27 @@ public class StudentController {
         dailyActivityService.addActivities(dailyActivity);
         return "activity";
     }
+    
+    /*
+    //child's activity view only
+    @RequestMapping(value = "/activities/{studentId}/{activityDate}", method = RequestMethod.GET)
+    public String viewChildActivityPage(@PathVariable("studentId") int studentId, @PathVariable("activityDate") String date,
+                                   Model model) {
+        DailyActivity dailyActivity = dailyActivityService.get(studentId, date);
+
+        if (dailyActivity == null) {
+            System.out.println("Could not find DailyActivity: " + studentId + " - " + date);
+            dailyActivity = new DailyActivity();
+
+            Student student = new Student();
+            student.setStudentId(studentId);
+            dailyActivity.setStudent(student);
+            dailyActivity.setActivityDate(date);
+        } else {
+            System.out.println("Retrieved DailyActivity: " + studentId + " - " + date);
+        }
+
+        model.addAttribute("dailyActivity", dailyActivity);
+        return "child_activity";
+    }*/
 }

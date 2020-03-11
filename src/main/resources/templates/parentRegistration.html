@@ -7,36 +7,38 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-    <title>Student Registration Page</title>
+    <title>Registration Page</title>
 </head>
 
 <body>
     <header th:insert="fragments/adminfragments.html :: header"> </header>
     <div class="container">
-        <h2 align="left: 50%">Student Registration</h2>
-    <form action="#" th:action="@{/register_student}" th:object="${student}" method="POST" class="form-horizontal">
+        <h2 align="left: 50%">Parent Registration</h2>
+    <form action="#" th:action="@{/register}" th:object="${parent}" method="POST" class="form-horizontal">
+        <input id="parentId" type="hidden" th:value="${parent.parentId}"/>  
         <div class="col-sm-4" margin="auto">
         <table class="table table-striped">
         <tbody>
-            <tr>
-                <td align='center'>Student Id</td>
-                <td><input type="text" th:field="${student.studentId}" /></td>
-              </tr>
+            
             <tr>
               <td align='center'>First Name</td>
-              <td><input type="text" th:field="${student.stuFirstName}" /></td>
-            </tr>
-           <tr>
-               <td align='center'>Last Name</td>
-               <td><input type="text" th:field="${student.stuLastName}" /></td>
-            </tr>
-           <tr>
-              <td align='center'>Class Id</td>
-              <td><input type="text" th:field="${student.classRoom.classId}" /> </td>
+              <td><input type="text" th:field="${parent.firstName}" /></td>
            </tr>
            <tr>
-              <td align='center'>Parent Id</td>
-              <td><input type="text" th:field="${student.parent.parentId}" /> </td>
+               <td align='center'>Last Name</td>
+               <td><input type="text" th:field="${parent.lastName}" /></td>
+            </tr>
+           <tr>
+              <td align='center'>Email</td>
+              <td><input type="email" th:field="${parent.email}" /> </td>
+           </tr>
+           <tr>
+              <td align='center'>Password</td>
+              <td><input type="password" th:field="${parent.password}" /> </td>
+           </tr>
+            <tr>
+              <td align='center'>Confirm Password</td>
+              <td><input type="password" th:field="${parent.confirmPassword}" /> </td>
            </tr>
            <tr>
               <th/>
