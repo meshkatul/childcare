@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Send Message</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Send new message</h2>
+    <form action="#" th:action="@{/messages}" th:object="${message}" method="POST">
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th>To</th>
+                <td><input type="text" th:field="*{messageTo}" /></td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td><input type="text" th:field="*{messageSubject}" /></td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td><textarea class="form-control" placeholder="Enter message text" th:field="*{messageBody}"/></td>
+            </tr>
+            <tr>
+                <th/>
+                <td><button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>&emsp;
+                    <button id="cancelBtn" type="submit" class="btn btn-secondary">Cancel</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>

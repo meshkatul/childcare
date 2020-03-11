@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<header th:insert="fragments/adminfragments.html :: header"> </header>
+<div class="container">
+    <br>
+    <h1>Inbox</h1>
+    <br>
+    <td><button id="newMessageBtn" type="submit" class="btn btn-outline-primary">New Message</button></td>
+    <br/>
+    <br/>
+    <table  class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Subject</th>
+        </tr>
+        </thead>
+
+        <tbody id="inbox">
+        <tr th:each="message : ${messageList}">
+            <td th:text="${message.messageFrom}"/>
+            <td th:text="${message.messageTo}"/>
+            <td><a th:href="@{/messages/{id}(id=${message.messageId})}"><label th:text="${message.messageSubject}"/></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#newMessageBtn').click(function(){
+            window.location.href= 'messages/0';
+        })
+    });
+</script>
+</body>
+
+</html>

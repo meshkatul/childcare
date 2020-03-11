@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html>
+    <head>
+        <style>
+            .container {
+                text-align: center;
+                width: 50%;
+                margin: 0 auto;
+                padding: 30px;
+                background: #f0e68c;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 style="font-family:verdana;">Registration successful!!!</h1>
+            <button onclick="goBack()">Go back to registration</button>
+            <br> <br>
+            <form action="#" th:action="@{/register_student}"
+                th:object="${student}" method="GET">
+                <input type="submit" value="Go to student registration" />
+            </form>
+        </div>
+            <script>
+                    function goBack() {
+                      window.history.back();
+                    }
+            </script>
+        </body>
+</html>

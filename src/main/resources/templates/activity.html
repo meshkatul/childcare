@@ -2,9 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
    <head>
-    <div th:replace="navbar :: navbar"></div>
       <meta charset="UTF-8">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
@@ -14,38 +13,39 @@
 
    <body> 
       <div class="container">
-         <h2>Daily Activities</h2>
-
-         <form action="#" th:action="@{/students/activities/{studId}/{actDate}(studId=${studentId},actDate=${activityDate})}" th:object="${dailyActivity}" method="POST"></form>
-         <input id="activityId" type="hidden" th:value="${dailyActivity.activityId}"/>
+         <h2 align="center">Daily Activities</h2>
+         <form action="#" th:action="@{/students/activities/{studId}/{actDate}(studId=${studentId},actDate=${activityDate})}" th:object="${dailyActivity}" method="POST">
+         <input id="activityId" name="activityId" type="hidden" th:field="${dailyActivity.activityId}"/>
          <table class="table table-striped">
             <tbody>
-            <tr>
-                <th>Date</th>
-                <td th:text="${dailyActivity.activityDate}"></td>
+             <tr>
+               <td align='center'>Date</td>
+               <td><input type="text" th:field="${dailyActivity.activityDate}" /></td>
             </tr>
             <tr>
-               <th>Student ID</th>
-               <td th:text="${dailyActivity.student.studentId}"></td>
-           </tr>
-           <tr>
-               <th>Meal</th>
-               <td th:text="${dailyActivity.meal}"></td>
-           </tr>
-           <tr>
-               <th>Nap</th>
-               <td th:text="${dailyActivity.nap}"></td>
+                <td align='center'>Student ID</td>
+                <td><input type="text" th:field="${dailyActivity.student.studentId}" /></td>
+             </tr>
+            <tr>
+               <td align='center'>Meal</td>
+               <td><input type="text" th:field="${dailyActivity.meal}" /> </td>
             </tr>
             <tr>
-               <th>Learning</th>
-               <td th:text="${dailyActivity.learning}"></td>
+               <td align='center'>Nap</td>
+               <td><input type="text" th:field="${dailyActivity.nap}" /> </td>
+            </tr>
+             <tr>
+               <td align='center'>Learning</td>
+               <td><input type="text" th:field="${dailyActivity.learning}" /> </td>
             </tr>
             <tr>
                <th/>
                <td><button id="submitBtn" type="submit" class="btn btn-default">Submit</button>&emsp;
                <button id="submitBtn" type="submit" class="btn btn-default">Cancel</button></td>
            </tr>
+           </tbody>
       </table>
-   </form>  
+   </form> 
+   </div> 
 </body>
 </html>

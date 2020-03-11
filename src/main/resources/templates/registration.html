@@ -1,78 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-   <head>
-      <title th:utext="${title}">Registration</title>
-      <style>
-         th, td {
-         padding: 5px;
-         }
-         td span  {
-         font-size:90%;
-         font-style: italic;
-         color: red;
-         }
-         .error {
-         color: red;
-         font-style: italic;
-         }
-      </style>
-   </head>
-   <body> 
-   <div style="background-color:lightblue">
-      <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
-         <tr><tr>
-            <td><h1>Register your account</h1></td>
-         </tr><center>
-      <form action="#" th:action="@{/register}" th:object="${user}" method="POST">
-         <table border='0' width='480px' cellpadding='0' cellspacing='0' align='center'>
-            <tr>
-               <td align='center'>User Name</td>
-               <td><input type="text" th:field="*{userName}" /></td>
-            </tr>
-            <tr>
-               <td align='center'> Password</td>
-               <td><input type="password" th:field="*{password}" /> </td>
-            </tr>
-            <tr>
-               <td align='center'>Re-enter Password</td>
-               <td><input type="password" th:field="*{confirmPassword}" /> </td>
-            </tr>
-            <tr>
-               <td align='center'>Email</td>
-               <td><input type="text" th:field="*{email}" /> </td>
-            </tr>
-            <tr>
-               <td align='center'>First Name</td>
-               <td><input type="text" th:field="*{firstName}" /> </td>
-            </tr>
-            <tr>
-               <td align='center'>Last Name</td>
-               <td><input type="text" th:field="*{lastName}" /> </td>
-            </tr>
-            <tr>
-               <td align='center'>Parent/Teacher</td>
-               <td><input type="text" th:field="*{role}" /> </td>
-            </tr>
-            <tr>
-               <td>&nbsp;</td>
-               <td>
-                  <input type="submit" value="Submit" />
-                  <a th:href="@{/}">Cancel</a>
-               </td>
-               <td>&nbsp;</td>
-            </tr>
-            </div>
-            <tr>
-               <td align='center'> Required field <span style="color:rgb(251,6,6);"> * </span> </td>
-               </tr>
-            <tr>
-               <td align='center' font size="+1">Already have an account? </td>
-            </tr>
-            <tr>
-               <td align='center'> <a th:href="@{/login}">Sign in</a><span style="color:rgb(43,16,209);"></span> </td>
-            </tr>
-         </table>
-      </form>  
-   </body>
+<head>
+<title th:utext="${title}">Registration</title>
+<style>
+th, td {
+	padding: 5px;
+}
+
+td span {
+	font-size: 90%;
+	font-style: italic;
+	color: red;
+}
+
+.error {
+	color: red;
+	font-style: italic;
+}
+</style>
+</head>
+<body>
+<header th:insert="fragments/adminfragments.html :: header"> </header>
+	<div style="background-color: lightblue">
+		<table border='0' width='480px' cellpadding='0' cellspacing='0'
+			align='center'>
+			<tr>
+			<tr>
+				<td><h1>Register parent</h1></td>
+			</tr>
+			<center>
+				<form action="#" th:action="@{/register}" th:object="${parent}"
+					method="POST">
+					 <input id="parentId" type="hidden" th:value="${parent.parentId}"/>
+					<table border='0' width='480px' cellpadding='0' cellspacing='0'
+						align='center'>
+						<tr>
+							<td align='center'>First Name</td>
+							<td><input type="text" th:field="*{firstName}" /></td>
+						</tr>
+						<tr>
+							<td align='center'>Last Name</td>
+							<td><input type="text" th:field="*{lastName}" /></td>
+						</tr>
+						<tr>
+							<td align='center'>Email</td>
+							<td><input type="text" th:field="*{email}" /></td>
+						</tr>
+						<tr>
+							<td align='center'>Password</td>
+							<td><input type="password" th:field="*{password}" /></td>
+						</tr>
+						<tr>
+							<td align='center'>Re-enter Password</td>
+							<td><input type="password" th:field="*{confirmPassword}" />
+							</td>
+						</tr>
+						<td>&nbsp;</td>
+						<td><input type="submit" value="Submit" /> 
+						<input type="submit" value="Cancel" /> <a th:href="@{/}"></a></td>
+						</td>
+						<td>&nbsp;</td>
+						</tr>
+						</div>
+					</table>
+				</form>
+		</body>
 </html>
