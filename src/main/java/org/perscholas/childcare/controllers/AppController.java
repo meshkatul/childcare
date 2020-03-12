@@ -38,8 +38,7 @@ public class AppController {
 	@RequestMapping({ "/index", "/" })
 	public String index() {
 		Collection<SimpleGrantedAuthority> authorities =
-				(Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext()
-						.getAuthentication().getAuthorities();
+				(Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 
 		Set<String> roles = authorities.stream()
 				.map(r -> r.getAuthority()).collect(Collectors.toSet());
