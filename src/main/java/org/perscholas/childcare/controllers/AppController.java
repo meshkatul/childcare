@@ -57,7 +57,10 @@ public class AppController {
         return "index";
     }
 
-
+    @RequestMapping("/infants")
+    public String infant() {
+        return "infants";
+    }
 
 
 }
