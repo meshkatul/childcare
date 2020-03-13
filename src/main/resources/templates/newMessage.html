@@ -10,9 +10,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-
-<div class="container">
+<header th:insert="fragments/adminfragments.html :: header"> </header>
+<br>
+<br>
+<div class="container" style="width: 50%">
     <h2>Send new message</h2>
+    <br>
     <form action="#" th:action="@{/messages}" th:object="${message}" method="POST">
         <table class="table table-striped">
             <tbody>
@@ -26,12 +29,12 @@
             </tr>
             <tr>
                 <th>Message</th>
-                <td><textarea class="form-control" placeholder="Enter message text" th:field="*{messageBody}"/></td>
+                <td><textarea class="form-control" placeholder="Enter message text" th:field="*{messageBody}"></textarea></td>
             </tr>
             <tr>
                 <th/>
                 <td><button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>&emsp;
-                    <button id="cancelBtn" type="submit" class="btn btn-secondary">Cancel</button></td>
+                    <button id="cancelBtn" type="submit" class="btn btn-primary">Cancel</button></td>
             </tr>
         </table>
     </form>

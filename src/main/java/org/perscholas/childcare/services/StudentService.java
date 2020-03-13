@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.perscholas.childcare.db.ClassRoomRepository;
 import org.perscholas.childcare.db.StudentRepository;
+import org.perscholas.childcare.dto.Parent;
 import org.perscholas.childcare.dto.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -30,5 +31,10 @@ public class StudentService {
 	
 	public Student addStudent(Student student) {
 		return studentRepository.save(student);
+	}
+
+
+	public Student getStudentByParent(Parent parent) {
+		return studentRepository.findStudentByParent(parent);
 	}
 }

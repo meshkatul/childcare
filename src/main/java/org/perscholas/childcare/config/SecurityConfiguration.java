@@ -18,7 +18,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/js/**",
                         "/css/**",
-                        "/img/**").permitAll()
+                        "/img/**",
+                        "/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -27,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/home");
     }
 
     @Autowired
@@ -41,9 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("d@d.com").password("{noop}password").roles("PARENT")
                 .and()
+                .withUser("arif844@gmail.com").password("{noop}password").roles("PARENT")
+                .and()
                 .withUser("admin@hma.com").password("{noop}admin").roles("ADMIN");
     }
-
 }
 
 	

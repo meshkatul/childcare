@@ -12,11 +12,14 @@
 
 <body>
     <header th:insert="fragments/adminfragments.html :: header"> </header>
-    <div class="container">
-        <h2 align="left: 50%">Parent Registration</h2>
-    <form action="#" th:action="@{/register}" th:object="${parent}" method="POST" class="form-horizontal">
+    <div class="container" style="width: 50%">
+        <br/>
+        <br/>
+        <h2>Parent Registration</h2>
+        <br/>
+        <br/>
+    <form action="#" th:action="@{/parent/}" th:object="${parent}" method="POST" class="form-horizontal">
         <input id="parentId" type="hidden" th:value="${parent.parentId}"/>  
-        <div class="col-sm-4" margin="auto">
         <table class="table table-striped">
         <tbody>
             
@@ -47,8 +50,7 @@
           </tr>
           </tbody>
         </table>
-        </div>
-  </form> 
+  </form>
   </div> 
 </body>
 </html> 

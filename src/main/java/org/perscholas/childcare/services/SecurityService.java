@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Configuration
 public class SecurityService {
 
-    String getCurrentUser() {
+    public String getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails)principal).getUsername();
 

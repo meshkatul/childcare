@@ -1,0 +1,86 @@
+CREATE TABLE `student` (
+	`student_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`stu_first_name` VARCHAR(255) NULL DEFAULT NULL,
+	`stu_last_name` VARCHAR(255) NULL DEFAULT NULL,
+	`class_id` INT(11) NULL DEFAULT NULL,
+	`parent_id` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`student_id`),
+	INDEX `FKt3mj3ri10grhbs2k0vn1ek1yn` (`class_id`),
+	INDEX `FKqqq09m02bgrk47qoe6fs3ht4w` (`parent_id`),
+	CONSTRAINT `FKqqq09m02bgrk47qoe6fs3ht4w` FOREIGN KEY (`parent_id`) REFERENCES `parent` (`parent_id`),
+	CONSTRAINT `FKt3mj3ri10grhbs2k0vn1ek1yn` FOREIGN KEY (`class_id`) REFERENCES `class_room` (`class_id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
+
+
+CREATE TABLE `user` (
+	`user_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`confirm_password` VARCHAR(255) NULL DEFAULT NULL,
+	`email` VARCHAR(255) NULL DEFAULT NULL,
+	`first_name` VARCHAR(255) NULL DEFAULT NULL,
+	`last_name` VARCHAR(255) NULL DEFAULT NULL,
+	`password` VARCHAR(255) NULL DEFAULT NULL,
+	`role` VARCHAR(255) NULL DEFAULT NULL,
+	`user_name` VARCHAR(255) NULL DEFAULT NULL,
+	PRIMARY KEY (`user_id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `parent` (
+	`parent_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`first_name` VARCHAR(50) NOT NULL,
+	`last_name` VARCHAR(50) NOT NULL,
+	`email` VARCHAR(50) NOT NULL,
+	`password` VARCHAR(50) NOT NULL,
+	`confirm_password` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`parent_id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=24
+;
+
+CREATE TABLE `message` (
+	`message_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`message_body` VARCHAR(255) NULL DEFAULT NULL,
+	`message_from` VARCHAR(255) NULL DEFAULT NULL,
+	`message_subject` VARCHAR(255) NULL DEFAULT NULL,
+	`message_to` VARCHAR(255) NULL DEFAULT NULL,
+	PRIMARY KEY (`message_id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=MyISAM
+AUTO_INCREMENT=5
+;
+
+CREATE TABLE `dailyactivity` (
+	`activity_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`activity_date` DATE NOT NULL,
+	`student_id` INT(11) NOT NULL,
+	`meal` VARCHAR(200) NOT NULL,
+	`nap` VARCHAR(200) NOT NULL,
+	`learning` VARCHAR(200) NOT NULL,
+	PRIMARY KEY (`activity_id`),
+	INDEX `FKeaq98nrdtyvde66jbok2q5lhb` (`student_id`),
+	CONSTRAINT `FKeaq98nrdtyvde66jbok2q5lhb` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=6
+;
+
+CREATE TABLE `class_room` (
+	`class_id` INT(11) NOT NULL,
+	`class_name` VARCHAR(50) NOT NULL DEFAULT '',
+	PRIMARY KEY (`class_id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+

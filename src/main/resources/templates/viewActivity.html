@@ -13,30 +13,34 @@
 
    <body> 
    <header th:insert="fragments/adminfragments.html :: header"> </header>
-      <div class="container">
+   <br>
+   <br>
+      <div class="container" style="width: 50%">
          <h2 align="center">Daily Activities</h2>
+         <br>
          <input id="activityId" name="activityId" type="hidden" th:field="${dailyActivity.activityId}"/>
+         <input id="student.studentId" name="student.studentId" type="hidden" th:field="${dailyActivity.student.studentId}"/>
          <table class="table table-striped">
             <tbody>
              <tr>
-               <td align='center'>Date</td>
-               <td><input type="text" th:field="${dailyActivity.activityDate}" /></td>
+               <th>Date</th>
+               <td th:text="${dailyActivity.activityDate}"></td>
             </tr>
             <tr>
-                <td align='center'>Student ID</td>
-                <td><input type="text" th:field="${dailyActivity.student.studentId}" /></td>
+                <th>Name</th>
+                <td th:text="${dailyActivity.student.stuFirstName} + ' ' + ${dailyActivity.student.stuLastName}"></td>
              </tr>
             <tr>
-               <td align='center'>Meal</td>
-               <td><input type="text" th:field="${dailyActivity.meal}" /> </td>
+               <th>Meal</th>
+               <td th:text="${dailyActivity.meal}"> </td>
             </tr>
             <tr>
-               <td align='center'>Nap</td>
-               <td><input type="text" th:field="${dailyActivity.nap}" /> </td>
+               <th>Nap</th>
+               <td th:text="${dailyActivity.nap}"> </td>
             </tr>
              <tr>
-               <td align='center'>Learning</td>
-               <td><input type="text" th:field="${dailyActivity.learning}" /> </td>
+               <th>Learning</th>
+               <td th:text="${dailyActivity.learning}"> </td>
             </tr>
            </tbody>
       </table> 

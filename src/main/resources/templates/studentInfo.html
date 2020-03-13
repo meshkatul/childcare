@@ -14,8 +14,11 @@
 
 <body>
 <header th:insert="fragments/adminfragments.html :: header"> </header>
-<div class="container">
-    <h2>Student Details</h2>
+<div class="container" style="width: 50%">
+    <br/>
+    <br/>
+    <h2 align="center">Student Details</h2>
+    <br/>
     <p>Select a date to see daily activity</p>
 
     <input id="studentId" type="hidden" th:value="${student.studentId}"/>
@@ -35,6 +38,10 @@
             <td th:text="${student.classRoom.className}"></td>
         </tr>
         <tr>
+            <th>Parent Name</th>
+            <td th:text="${student.parent.firstName} + ' ' + ${student.parent.lastName}"></td>
+        </tr>
+        <tr>
             <th>Date</th>
             <td>
                 <div class="input-group input-append date" id="dateRangePicker">
@@ -43,12 +50,13 @@
                 </div>
             </td>
         </tr>
-        <tr>
-            <th/>
-            <td><button id="submitBtn" type="submit" class="btn btn-default">Submit</button></td>
-        </tr>
         </tbody>
     </table>
+    <div class="form-group">
+       
+        <button id="submitBtn" type="submit" class="btn btn-primary mt-3">Show activity</button>
+       
+    </div>
 </div>
 <script>
     $(document).ready(function () {

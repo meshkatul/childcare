@@ -13,36 +13,39 @@
 
    <body> 
    <header th:insert="fragments/adminfragments.html :: header"> </header>
-      <div class="container">
+      <div class="container" style="width: 50%">
+      <br/>
+   	  <br/>
          <h2 align="center">Daily Activities</h2>
+         <br/>
          <form action="#" th:action="@{/students/activities/{studId}/{actDate}(studId=${studentId},actDate=${activityDate})}" th:object="${dailyActivity}" method="POST">
          <input id="activityId" name="activityId" type="hidden" th:field="${dailyActivity.activityId}"/>
+         <input id="studentId" name="studentId" type="hidden" th:field="${dailyActivity.student.studentId}"/>
          <table class="table table-striped">
             <tbody>
              <tr>
-               <td align='center'>Date</td>
-               <td><input type="text" th:field="${dailyActivity.activityDate}" /></td>
+               <td>Date</td>
+               <td th:text="${dailyActivity.activityDate}"></td>
             </tr>
             <tr>
-                <td align='center'>Student ID</td>
-                <td><input type="text" th:field="${dailyActivity.student.studentId}" /></td>
-             </tr>
+            <td>Student Name</td>
+            <td th:text="${dailyActivity.student.stuFirstName} + ' ' + ${dailyActivity.student.stuLastName}"></td>
+        	</tr>
             <tr>
-               <td align='center'>Meal</td>
+               <td>Meal</td>
                <td><input type="text" th:field="${dailyActivity.meal}" /> </td>
             </tr>
             <tr>
-               <td align='center'>Nap</td>
+               <td>Nap</td>
                <td><input type="text" th:field="${dailyActivity.nap}" /> </td>
             </tr>
              <tr>
-               <td align='center'>Learning</td>
+               <td>Learning</td>
                <td><input type="text" th:field="${dailyActivity.learning}" /> </td>
             </tr>
             <tr>
                <th/>
-               <td><button id="submitBtn" type="submit" class="btn btn-primary mt-3">Submit</button>&emsp;
-              <button id="submitBtn" type="submit" class="btn btn-primary mt-3">Cancel</button></td>
+               <td><button id="submitBtn" type="submit" class="btn btn-primary mt-3">Submit</button>&emsp;</td>
            </tr>
            </tbody>
       </table>

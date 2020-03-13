@@ -1,36 +1,58 @@
 package org.perscholas.childcare.controllers;
 
-import java.util.List;
-
 import org.perscholas.childcare.dto.Parent;
+import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.services.ParentService;
+import org.perscholas.childcare.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@RestController
+@Controller
 @RequestMapping("parent")
 public class ParentController {
 	@Autowired
 	ParentService parentService;
 
-	@GetMapping
-	public List<Parent> list() {
-		return parentService.listParents();
+	@Autowired
+	StudentService studentService;
+
+	@RequestMapping
+	public String viewRegistrationPage(Model model) {
+		Parent parentForm = new Parent();
+		model.addAttribute("parent", parentForm);
+
+		return "parentRegistration";
 	}
-	
-	@GetMapping("{id}")
-	public Parent get(@PathVariable String id) {
-		return parentService.getParent(Integer.parseInt(id));
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String saveParent(@ModelAttribute("parent") Parent newParent) {
+		Parent savedParent = parentService.addParent(newParent);
+		return "redirect:/parent/" + savedParent.getParentId() + "/student";
 	}
-	
-	@PostMapping
-	public void add(@RequestBody Parent newParent) {
-		parentService.addParent(newParent);
+
+
+	//show student registration page
+	@RequestMapping(value = "/{parentId}/student", method = RequestMethod.GET)
+	public String viewStudentRegistrationPage(@PathVariable("parentId") int parentId, Model model) {
+		Student studentForm = new Student();
+
+		Parent parent = parentService.getParent(parentId);
+		studentForm.setParent(parent);
+		model.addAttribute("student", studentForm);
+
+		return "studentRegistration";
+	}
+
+	// add new student
+	@RequestMapping(value = "/{parentId}/student", method = RequestMethod.POST)
+	public String saveStudent(@PathVariable("parentId") int parentId, @ModelAttribute("student") Student newStudent) {
+		studentService.addStudent(newStudent);
+		return "redirect:/students";
 	}
 
 }
