@@ -1,3 +1,5 @@
+all tables
+
 CREATE TABLE `student` (
 	`student_id` INT(11) NOT NULL AUTO_INCREMENT,
 	`stu_first_name` VARCHAR(255) NULL DEFAULT NULL,
