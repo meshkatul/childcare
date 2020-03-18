@@ -20,6 +20,7 @@ dependencies {
 	
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
 	
 	runtimeOnly 'mysql:mysql-connector-java:5.1.6'
 
