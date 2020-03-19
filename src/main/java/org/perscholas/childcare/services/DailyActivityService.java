@@ -26,7 +26,7 @@ public class DailyActivityService {
 				.findDailyActivitiesByStudentAndActivityDate(studentRepository.findById(studentId).get(), activityDate);
 	}
 
-	// adding activities
+
 	public void addActivities(DailyActivity dailyActivity) {
 		dailyActivityRepository.save(dailyActivity);
 	}
