@@ -33,11 +33,13 @@ public class AppController {
         return "home";
     }
     
+    //show login page
     @RequestMapping("/login")
     public String login() {
         return "login";
     }
 
+    //authentication and give access based on roles
     @RequestMapping({"/index"})
     public String index() {
         @SuppressWarnings("unchecked")
@@ -57,6 +59,9 @@ public class AppController {
         return "index";
     }
 
+    
+    
+    
     @RequestMapping("/infants")
     public String infant() {
         return "infants";

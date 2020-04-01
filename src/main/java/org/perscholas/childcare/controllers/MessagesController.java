@@ -19,18 +19,19 @@ public class MessagesController {
     @Autowired
     MessageService service;
 
+    //get all message in inbox
     @RequestMapping
     public String list(Model model) {
         List<Message> messageList = service.listForCurrentUser();
         model.addAttribute("messageList", messageList);
-
         return "messageList";
     }
 
+    
+    //view message page
     @RequestMapping(value = "{messageId}", method = RequestMethod.GET)
     public String sendMessage(@PathVariable int messageId, Model model) {
         Message message = service.get(messageId);
-
         if(message == null) {
             model.addAttribute("message", new Message());
             return "newMessage";
@@ -40,6 +41,7 @@ public class MessagesController {
         }
     }
 
+    //sending new message
     @RequestMapping(method = RequestMethod.POST)
     public String sendMessage(@ModelAttribute("message") Message message) {
         service.save(message);

@@ -16,6 +16,7 @@ public class MessageService {
     @Autowired
     SecurityService securityService;
 
+    //get all message of current user
     public List<Message> listForCurrentUser() {
         return repository.findByMessageTo(securityService.getCurrentUser());
     }
@@ -24,11 +25,13 @@ public class MessageService {
         return repository.findAll();
     }
 
+    //view individual message
     public Message get(int messageId) {
         return repository.findById(messageId).orElse(null);
     }
 
 
+    //send new message
     public Message save(Message message) {
         if(message.getMessageFrom() == null) {
             message.setMessageFrom(securityService.getCurrentUser());

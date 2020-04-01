@@ -34,15 +34,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("a@a.com").password("{noop}password").roles("PARENT")
+                .withUser("ava@gmail.com").password("{noop}password").roles("PARENT")
                 .and()
-                .withUser("b@b.com").password("{noop}password").roles("PARENT")
+                .withUser("chris@gmail.com").password("{noop}password").roles("PARENT")
                 .and()
-                .withUser("c@c.com").password("{noop}password").roles("PARENT")
+                .withUser("imran@gmail.com").password("{noop}password").roles("PARENT")
                 .and()
-                .withUser("d@d.com").password("{noop}password").roles("PARENT")
+                .withUser("diana@gmail.com").password("{noop}password").roles("PARENT")
+                .and()
+                .withUser("mark@gmail.com").password("{noop}password").roles("PARENT")
                 .and()
                 .withUser("arif844@gmail.com").password("{noop}password").roles("PARENT")
+                .and()
+                .withUser("abc@gmail.com").password("{noop}password").roles("PARENT")
+                .and()
+                .withUser("john@gmail.com").password("{noop}password").roles("PARENT")
                 .and()
                 .withUser("admin@hma.com").password("{noop}admin").roles("ADMIN");
     }
