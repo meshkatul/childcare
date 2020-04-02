@@ -66,7 +66,6 @@ public class StudentController {
 			if (dailyActivity == null) {
 				System.out.println("Could not find DailyActivity: " + studentId + " - " + date);
 				dailyActivity = new DailyActivity();
-
 				Student student = studentService.getStudent(studentId);
 				dailyActivity.setStudent(student);
 				dailyActivity.setActivityDate(date);
@@ -80,7 +79,6 @@ public class StudentController {
 			if (dailyActivity == null) {
 				System.out.println("Could not find DailyActivity: " + studentId + " - " + date);
 				dailyActivity = new DailyActivity();
-
 				Student student = studentService.getStudent(studentId);
 				dailyActivity.setStudent(student);
 				dailyActivity.setActivityDate(date);

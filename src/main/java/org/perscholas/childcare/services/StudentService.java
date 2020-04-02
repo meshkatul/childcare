@@ -29,11 +29,12 @@ public class StudentService {
 		return student;
 	}
 	
+	//add new student
 	public Student addStudent(Student student) {
 		return studentRepository.save(student);
 	}
 
-
+    //get a student by parent
 	public Student getStudentByParent(Parent parent) {
 		return studentRepository.findStudentByParent(parent);
 	}

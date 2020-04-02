@@ -21,9 +21,9 @@ public class DailyActivityService {
 		return dailyActivityRepository.findAll();
 	}
 
+	//get activities of a particular student by date
 	public DailyActivity get(int studentId, String activityDate) {
-		return dailyActivityRepository
-				.findDailyActivitiesByStudentAndActivityDate(studentRepository.findById(studentId).get(), activityDate);
+		return dailyActivityRepository.findDailyActivitiesByStudentAndActivityDate(studentRepository.findById(studentId).get(), activityDate);
 	}
 
 

@@ -21,14 +21,15 @@ public class ParentController {
 	@Autowired
 	StudentService studentService;
 
+	//view parent registration page
 	@RequestMapping
 	public String viewRegistrationPage(Model model) {
 		Parent parentForm = new Parent();
 		model.addAttribute("parent", parentForm);
-
 		return "parentRegistration";
 	}
 
+	//register parent and go to student registration page
 	@RequestMapping(method = RequestMethod.POST)
 	public String saveParent(@ModelAttribute("parent") Parent newParent) {
 		Parent savedParent = parentService.addParent(newParent);
@@ -36,15 +37,13 @@ public class ParentController {
 	}
 
 
-	//show student registration page
+	//show student registration page with parent info
 	@RequestMapping(value = "/{parentId}/student", method = RequestMethod.GET)
 	public String viewStudentRegistrationPage(@PathVariable("parentId") int parentId, Model model) {
 		Student studentForm = new Student();
-
 		Parent parent = parentService.getParent(parentId);
 		studentForm.setParent(parent);
 		model.addAttribute("student", studentForm);
-
 		return "studentRegistration";
 	}
 
