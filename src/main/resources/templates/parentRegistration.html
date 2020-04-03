@@ -25,23 +25,27 @@
             
             <tr>
               <td align='center'>First Name</td>
-              <td><input type="text" th:field="${parent.firstName}" /></td>
+              <td><input type="text" name = "firstName" th:field="${parent.firstName}" 
+              pattern="[A-Za-z]{1,10}" title="Letters only"/></td>
            </tr>
            <tr>
                <td align='center'>Last Name</td>
-               <td><input type="text" th:field="${parent.lastName}" /></td>
+               <td><input type="text" th:field="${parent.lastName}" 
+               pattern="[A-Za-z]{1,10}" title="Letters only"/></td>
             </tr>
            <tr>
               <td align='center'>Email</td>
-              <td><input type="email" th:field="${parent.email}" /> </td>
+              <td><input type="email" th:field="${parent.email}"/> </td>
            </tr>
            <tr>
               <td align='center'>Password</td>
-              <td><input type="password" th:field="${parent.password}" /> </td>
+              <td><input type="password" id="password" th:field="${parent.password}" 
+              pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,10}$"
+              title ="Passwords must contain 6 to 10 characters, including uppercase, lowercase letters and numbers" /> </td>
            </tr>
             <tr>
               <td align='center'>Confirm Password</td>
-              <td><input type="password" th:field="${parent.confirmPassword}" /> </td>
+              <td><input type="password" id="confirm_password" th:field="${parent.confirmPassword}" /> </td>
            </tr>
            <tr>
               <th/>
@@ -52,6 +56,23 @@
         </table>
   </form>
   </div> 
+  <div>
+  	 <script>
+  	var password = document.getElementById("password");
+  	var confirm_password = document.getElementById("confirm_password");
+
+	function validatePassword(){
+  		if(password.value != confirm_password.value) {
+    	confirm_password.setCustomValidity("Passwords Didn't Match");
+  		} else {
+    		confirm_password.setCustomValidity('');
+  		}
+		}
+
+		password.onchange = validatePassword;
+		confirm_password.onkeyup = validatePassword;
+  	</script>
+  </div>
 </body>
 </html> 
 

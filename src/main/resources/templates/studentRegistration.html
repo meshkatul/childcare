@@ -37,11 +37,13 @@
 					</tr>
 					<tr>
 						<td align='center'>First Name</td>
-						<td><input type="text" th:field="${student.stuFirstName}" /></td>
+						<td><input type="text" th:field="${student.stuFirstName}"
+						pattern="[A-Za-z]{1,10}" title="Letters only" /></td>
 					</tr>
 					<tr>
 						<td align='center'>Last Name</td>
-						<td><input type="text" th:field="${student.stuLastName}" /></td>
+						<td><input type="text" th:field="${student.stuLastName}" 
+						pattern="[A-Za-z]{1,10}" title="Letters only"/></td>
 					</tr>
 					<tr>
 						<td align='center'>Class Id</td>
