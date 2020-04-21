@@ -14,7 +14,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        
+    	 http.csrf().disable()
+    	 .authorizeRequests()
                 .antMatchers(
                         "/js/**",
                         "/css/**",
@@ -22,8 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                    .loginPage("/login").permitAll()
+                .formLogin().loginPage("/login").permitAll()
                     .defaultSuccessUrl("/index")
                 .and()
                 .logout().permitAll()

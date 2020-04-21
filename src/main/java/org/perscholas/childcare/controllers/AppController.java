@@ -38,6 +38,7 @@ public class AppController {
     public String login() {
         return "login";
     }
+    
 
     //authentication and give access based on roles
     @RequestMapping({"/index"})
@@ -58,6 +59,8 @@ public class AppController {
 
         return "index";
     }
+    
+  
 
     
     
