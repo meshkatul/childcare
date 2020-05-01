@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Send Message</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<header th:insert="fragments/adminfragments.html :: header"></header>
+<br>
+<br>
+<div class="container" style="width: 50%">
+    <br>
+    <h2>Reply Message</h2>
+    <br>
+    <form action="#" th:action="@{/messages/}" th:object="${message}" method="POST">
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th>To</th>
+            <td><input type="text" th:field="${message.messageTo}" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <th>Subject</th>
+            <td><input type="text" th:field="*{messageSubject}" /></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><textarea class="form-control" placeholder="Enter message text" th:field="*{messageBody}"></textarea></td>
+        </tr>
+        <tr>
+            <th/>
+            <td><button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>&emsp;
+            </tr>
+    </table>
+    </form>
+</div>
+
+</body>
+</html>
