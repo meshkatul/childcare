@@ -11,42 +11,34 @@
 </head>
 <body>
 <header th:insert="fragments/adminfragments.html :: header"></header>
-
-
+<br>
+<br>
 <div class="container" style="width: 50%">
     <br>
-    <h1>View Message</h1>
+    <h2>Reply Message</h2>
     <br>
-     <input id="messageId"  th:value="${message.messageId}"/>
-     
+    <form action="#" th:action="@{/messages/}" th:object="${message}" method="POST">
     <table class="table table-striped">
         <tbody>
         <tr>
-            <th>From</th>
-            <td th:text="${message.messageFrom}"></td>
+            <th>To</th>
+            <td><input type="text" th:field="${message.messageTo}" readonly="readonly"/></td>
         </tr>
         <tr>
             <th>Subject</th>
-            <td th:text="${message.messageSubject}"></td>
+            <td><input type="text" th:field="*{messageSubject}" /></td>
         </tr>
         <tr>
             <th>Message</th>
-            <td th:text="${message.messageBody}"></td>
+            <td><textarea class="form-control" placeholder="Enter message text" th:field="*{messageBody}"></textarea></td>
         </tr>
         <tr>
-            <td><button id="submitBtn" type="submit" class="btn btn-primary">Reply</button>&emsp;
+            <th/>
+            <td><button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>&emsp;
             </tr>
     </table>
+    </form>
 </div>
-<script>
-    $(document).ready(function () {
-        $('#submitBtn').click(function(){
-            var messageId = $("#messageId").val();
-            console.log(messageId + '/')
-            window.location.href= 'reply/' + messageId + '/';
-        });
-    });
-        </script>
 
 </body>
 </html>
