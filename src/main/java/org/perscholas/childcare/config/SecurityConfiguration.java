@@ -1,6 +1,5 @@
 package org.perscholas.childcare.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,7 +10,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         
@@ -32,9 +31,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/home");
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
+    
+    
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+       auth.inMemoryAuthentication()
                 .withUser("ava@gmail.com").password("{noop}password").roles("PARENT")
                 .and()
                 .withUser("chris@gmail.com").password("{noop}password").roles("PARENT")

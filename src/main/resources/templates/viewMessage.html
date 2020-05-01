@@ -17,6 +17,8 @@
     <br>
     <h1>View Message</h1>
     <br>
+     <input id="messageId"  th:value="${message.messageId}"/>
+     
     <table class="table table-striped">
         <tbody>
         <tr>
@@ -31,8 +33,20 @@
             <th>Message</th>
             <td th:text="${message.messageBody}"></td>
         </tr>
+        <tr>
+            <td><button id="submitBtn" type="submit" class="btn btn-primary">Reply</button>&emsp;
+            </tr>
     </table>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#submitBtn').click(function(){
+            var messageId = $("#messageId").val();
+            console.log(messageId + '/')
+            window.location.href= 'reply/' + messageId + '/';
+        });
+    });
+        </script>
 
 </body>
 </html>

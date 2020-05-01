@@ -2,7 +2,6 @@ package org.perscholas.childcare.services;
 
 
 import java.util.List;
-
 import org.perscholas.childcare.db.ParentRepository;
 import org.perscholas.childcare.dto.Parent;
 import org.perscholas.childcare.dto.Student;
@@ -13,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class ParentService {
 	@Autowired
 	ParentRepository parentRepository;
-
+	
 	@Autowired
 	SecurityService securityService;
 
@@ -44,5 +43,6 @@ public class ParentService {
 		return student;
 	}
 
+	
 
 }

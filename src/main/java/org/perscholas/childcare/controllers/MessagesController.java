@@ -1,6 +1,8 @@
 package org.perscholas.childcare.controllers;
 
 import org.perscholas.childcare.dto.Message;
+import org.perscholas.childcare.dto.Parent;
+import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,36 +18,45 @@ import java.util.List;
 @RequestMapping("messages")
 public class MessagesController {
 
-    @Autowired
-    MessageService service;
+	@Autowired
+	MessageService service;
 
-    //get all message in inbox
-    @RequestMapping
-    public String list(Model model) {
-        List<Message> messageList = service.listForCurrentUser();
-        model.addAttribute("messageList", messageList);
-        return "messageList";
-    }
+	// get all message in inbox
+	@RequestMapping
+	public String list(Model model) {
+		List<Message> messageList = service.listForCurrentUser();
+		model.addAttribute("messageList", messageList);
+		return "messageList";
+	}
 
-    
-    //view message page
-    @RequestMapping(value = "{messageId}", method = RequestMethod.GET)
-    public String sendMessage(@PathVariable int messageId, Model model) {
-        Message message = service.get(messageId);
-        if(message == null) {
-            model.addAttribute("message", new Message());
-            return "newMessage";
-        } else {
-            model.addAttribute("message", message);
-            return "viewMessage";
-        }
-    }
+	// view message page
+	@RequestMapping(value = "{messageId}", method = RequestMethod.GET)
+	public String replyMessage(@PathVariable int messageId, Model model) {
+		Message message = service.get(messageId);
+		if (message == null) {
+			model.addAttribute("message", new Message());
+			return "newMessage";
+		} else {
+			model.addAttribute("message", message);
+			return "viewMessage";
+		}
+	}
 
-    //sending new message
-    @RequestMapping(method = RequestMethod.POST)
-    public String sendMessage(@ModelAttribute("message") Message message) {
-        service.save(message);
-        return "redirect:/messages";
-    }
+	@RequestMapping(value = "/reply/{messageId}", method = RequestMethod.GET)
+	public String sendMessage(@PathVariable("messageId") int messageId, Model model) {
+		Message replyMessage = new Message();
+		Message message = service.get(messageId);
+		replyMessage.setMessageTo(message.getMessageFrom());
+		
+		model.addAttribute("message", replyMessage);
+		return "replyMessage";
+	}
+
+	// sending new message
+	@RequestMapping(method = RequestMethod.POST)
+	public String sendMessage(@ModelAttribute("message") Message message) {
+		service.save(message);
+		return "redirect:/messages";
+	}
 
 }
