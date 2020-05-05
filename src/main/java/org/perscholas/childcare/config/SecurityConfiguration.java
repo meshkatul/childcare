@@ -21,6 +21,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/img/**",
                         "/", "/home").permitAll()
+                
+                .antMatchers("/students").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/parent").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/parent/{parentId}/student").access("hasRole('ROLE_ADMIN')")
+            
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
@@ -29,6 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/home");
+    	 		
     }
 
     

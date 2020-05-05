@@ -53,7 +53,6 @@ public class AppController {
             return "redirect:/students";
         } else if (roles.contains("ROLE_PARENT")) {
             Student student = parentService.getStudentByParent();
-
             return "redirect:/students/" + student.getStudentId();
         }
 
@@ -61,14 +60,11 @@ public class AppController {
     }
     
   
-
-    
-    
-    
-    @RequestMapping("/infants")
+   
+   /* @RequestMapping("/infants")
     public String infant() {
         return "infants";
-    }
+    }*/
 
 
 }

@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.perscholas.childcare.db.ParentRepository;
 import org.perscholas.childcare.dto.DailyActivity;
+import org.perscholas.childcare.dto.Parent;
 import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.services.DailyActivityService;
 import org.perscholas.childcare.services.StudentService;
 import org.perscholas.childcare.services.ParentService;
+import org.perscholas.childcare.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +35,13 @@ public class StudentController {
 	@Autowired
 	ParentService parentService;
 
+	@Autowired
+	SecurityService securityService;
+	
+	@Autowired
+	ParentRepository parentRepository;
+	
+	
 	// show student list page
 	@RequestMapping
 	public String viewStudentPage(Model model) {
@@ -40,13 +50,32 @@ public class StudentController {
 		model.addAttribute("listStudent", listStudent);
 		return "studentList";
 	}
+	
+	
 
 	// show individual student page and search for activity by date
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	public String viewStudentInfoPage(@PathVariable int id, Model model) {
 		Student student = studentService.getStudent(id);
 		model.addAttribute(student);
-		return "studentInfo";
+		@SuppressWarnings("unchecked")
+		Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>) SecurityContextHolder
+				.getContext().getAuthentication().getAuthorities();
+
+		Set<String> roles = authorities.stream().map(r -> r.getAuthority()).collect(Collectors.toSet());
+		if (roles.contains("ROLE_ADMIN")) {
+			return "studentInfo";
+		} else if (roles.contains("ROLE_PARENT")) {
+			Parent parent = parentRepository.findByEmail(securityService.getCurrentUser());
+			Student stu = studentService.getStudentByParent(parent);
+			if(stu.getStudentId()==id) {
+				return "studentInfo";
+			}
+			else {
+				return "accessDenied";
+			}
+		}
+		return "index";
 	}
 
 	// view students activity by date
@@ -76,14 +105,18 @@ public class StudentController {
 			model.addAttribute("dailyActivity", dailyActivity);
 			return "addActivity";
 		} else if (roles.contains("ROLE_PARENT")) {
-			if (dailyActivity == null) {
+			Parent parent = parentRepository.findByEmail(securityService.getCurrentUser());
+			Student stu = studentService.getStudentByParent(parent);
+			if ((dailyActivity == null) && (stu.getStudentId()== studentId)) {
 				System.out.println("Could not find DailyActivity: " + studentId + " - " + date);
 				dailyActivity = new DailyActivity();
 				Student student = studentService.getStudent(studentId);
 				dailyActivity.setStudent(student);
 				dailyActivity.setActivityDate(date);
-			} else {
+			} else if ((dailyActivity != null) && (stu.getStudentId()== studentId)){
 				System.out.println("Retrieved DailyActivity: " + studentId + " - " + date);
+			} else {
+				return "accessDenied";
 			}
 
 			model.addAttribute("dailyActivity", dailyActivity);

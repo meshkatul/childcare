@@ -30,7 +30,6 @@ public class MessageService {
         return repository.findById(messageId).orElse(null);
     }
 
-
     //send new message
     public Message save(Message message) {
         if(message.getMessageFrom() == null) {
