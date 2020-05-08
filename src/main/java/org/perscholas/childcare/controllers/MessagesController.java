@@ -1,8 +1,10 @@
 package org.perscholas.childcare.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.perscholas.childcare.db.MessageRepository;
 import org.perscholas.childcare.dto.Message;
-import org.perscholas.childcare.dto.Parent;
-import org.perscholas.childcare.dto.Student;
 import org.perscholas.childcare.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("messages")
 public class MessagesController {
 
 	@Autowired
 	MessageService service;
+	
+	@Autowired
+    MessageRepository repository;
 
 	// get all message in inbox
 	@RequestMapping
@@ -28,19 +31,24 @@ public class MessagesController {
 		model.addAttribute("messageList", messageList);
 		return "messageList";
 	}
-
+	
+	
 	// view message page
-	@RequestMapping(value = "{messageId}", method = RequestMethod.GET)
-	public String replyMessage(@PathVariable int messageId, Model model) {
-		Message message = service.get(messageId);
-		if (message == null) {
-			model.addAttribute("message", new Message());
-			return "newMessage";
-		} else {
-			model.addAttribute("message", message);
-			return "viewMessage";
+		@RequestMapping(value = "{messageId}", method = RequestMethod.GET)
+		public String replyMessage(@PathVariable int messageId, Model model) {
+			Message message = service.get(messageId);
+			List<Message> messageList = new ArrayList<Message>();
+					messageList = service.listForCurrentUser();
+			if (message == null) {
+				model.addAttribute("message", new Message());
+				return "newMessage";
+			} else if(messageList.contains(message)){
+				model.addAttribute("message", message);
+				return "viewMessage";
+			} else {
+				return "accessDenied";
+			}
 		}
-	}
 
 	@RequestMapping(value = "/reply/{messageId}", method = RequestMethod.GET)
 	public String sendMessage(@PathVariable("messageId") int messageId, Model model) {
